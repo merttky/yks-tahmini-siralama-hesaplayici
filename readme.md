@@ -1,0 +1,1 @@
+YKS 2026 Tahmini Sıralama Hesaplayıcı
