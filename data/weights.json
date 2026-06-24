@@ -1,54 +1,70 @@
 {
   "2025": {
-    "say": {
-      "taban": 132.87,
-      "tr": 1.2,
-      "sos": 1.27,
-      "mat": 1.39,
-      "fen": 1.07,
-      "mat2": 2.89,
-      "fiz2": 2.46,
-      "kimya2": 2.53,
-      "biyo2": 2.61
+    "base_score": 132.87,
+    "tyt": {
+      "lowest_rank": 2351397,
+      "turkce": 1.2,
+      "sosyal_bilimler": 1.27,
+      "matematik": 1.39,
+      "fen_bilimleri": 1.07
+    },
+    "ayt": {
+      "lowest_rank": 1549883,
+      "matematik": 2.89,
+      "fizik": 2.46,
+      "kimya": 2.53,
+      "biyoloji": 2.61
     }
   },
   "2024": {
-    "say": {
-      "taban": 133.28,
-      "tr": 1.11,
-      "sos": 1.12,
-      "mat": 1.11,
-      "fen": 1.20,
-      "mat2": 3.19,
-      "fiz2": 2.43,
-      "kimya2": 3.07,
-      "biyo2": 2.51
+    "base_score": 133.28,
+    "tyt": {
+      "lowest_rank": 2819075,
+      "turkce": 1.11,
+      "sosyal_bilimler": 1.12,
+      "matematik": 1.11,
+      "fen_bilimleri": 1.2
+    },
+    "ayt": {
+      "lowest_rank": 1776449,
+      "matematik": 3.19,
+      "fizik": 2.43,
+      "kimya": 3.07,
+      "biyoloji": 2.51
     }
   },
   "2023": {
-    "say": {
-      "taban": 128.23,
-      "tr": 1.19,
-      "sos": 1.24,
-      "mat": 1.24,
-      "fen": 1.26,
-      "mat2": 2.82,
-      "fiz2": 2.48,
-      "kimya2": 2.94,
-      "biyo2": 3.10
+    "base_score": 128.23,
+    "tyt": {
+      "lowest_rank": 2995399,
+      "turkce": 1.19,
+      "sosyal_bilimler": 1.24,
+      "matematik": 1.24,
+      "fen_bilimleri": 1.26
+    },
+    "ayt": {
+      "lowest_rank": 1980480,
+      "matematik": 2.82,
+      "fizik": 2.48,
+      "kimya": 2.94,
+      "biyoloji": 3.1
     }
   },
   "2022": {
-    "say": {
-      "taban": 125.41,
-      "tr": 1.19,
-      "sos": 1.32,
-      "mat": 1.21,
-      "fen": 1.32,
-      "mat2": 2.59,
-      "fiz2": 3.19,
-      "kimya2": 2.95,
-      "biyo2": 3.11
+    "base_score": 125.41,
+    "tyt": {
+      "lowest_rank": 3008029,
+      "turkce": 1.19,
+      "sosyal_bilimler": 1.32,
+      "matematik": 1.21,
+      "fen_bilimleri": 1.32
+    },
+    "ayt": {
+      "lowest_rank": 1852635,
+      "matematik": 2.59,
+      "fizik": 3.19,
+      "kimya": 2.95,
+      "biyoloji": 3.11
     }
   }
 }

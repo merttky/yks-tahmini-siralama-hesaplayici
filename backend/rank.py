@@ -8,22 +8,27 @@ def calculate_rank(score: float, year: int) -> int:
     Spline verisi üzerinden kübik interpolasyon uygular.
     """
     current_dir = Path(__file__).resolve().parent
-    json_path = current_dir.parent / "data" / "spline.json"
+    spline_path = current_dir.parent / "data" / "spline.json"
+    weights_path = current_dir.parent / "data" / "weights.json"
 
-    with open(json_path, "r", encoding="utf-8") as f:
+    with open(spline_path, "r", encoding="utf-8") as f:
         spline = json.load(f)
+
+    with open(weights_path, "r", encoding="utf-8") as f:
+        weights = json.load(f)
 
     if str(year) not in spline:
         raise KeyError(f"{year} yılı için spline verisi bulunamadı.")
 
-    spline_data = spline[str(year)]
+    # Sayısal için ayarlandı, gelecekte güncelleme için diğer alanlar eklenebilir
+    spline_data = spline[str(year)]["say"]
     score_int = int(score)
 
     # Sınır durumlar
     if score_int >= 560:
         return 1
-    if score_int <= 100:
-        return 3_500_000
+    if score_int <= weights[str(year)]["base_score"]:
+        return weights[str(year)]["tyt"]["lowest_rank"]
 
     interval = next(
         (s for s in spline_data if s["x_min"] <= score_int <= s["x_max"]),
@@ -35,8 +40,8 @@ def calculate_rank(score: float, year: int) -> int:
 
     dx = score_int - interval["x_min"]
     rank = (
-        interval["a"] * (dx ** 3)
-        + interval["b"] * (dx ** 2)
+        interval["a"] * (dx**3)
+        + interval["b"] * (dx**2)
         + interval["c"] * dx
         + interval["d"]
     )
@@ -47,21 +52,21 @@ def calculate_rank(score: float, year: int) -> int:
 if __name__ == "__main__":
     from calculator import calculate_score
 
-    test_score22 = calculate_score(2022, 94, 30, 15, 25, 15, 30, 14, 13, 8) 
+    test_score22 = calculate_score(2022, 833.42950, 36.5, 13, 24.5, 15.5, 34.5, 12.75, 11.75, 10.5)
     rank22 = int(calculate_rank(test_score22, 2022))
     print(f"{test_score22:.3f} Puan → 2022 Sıralama: {rank22}")
 
-    test_score23 = calculate_score(2023, 94, 30, 15, 25, 15, 30, 14, 13, 8)
+    test_score23 = calculate_score(2023, 83.42950, 36.5, 13, 24.5, 15.5, 34.5, 12.75, 11.75, 10.5)
     rank23 = int(calculate_rank(test_score23, 2023))
     print(f"{test_score23:.3f} Puan → 2023 Sıralama: {rank23}")
 
-    test_score24 = calculate_score(2024, 94, 30, 15, 25, 15, 30, 14, 13, 8)
+    test_score24 = calculate_score(2024, 83.42950, 36.5, 13, 24.5, 15.5, 34.5, 12.75, 11.75, 10.5)
     rank24 = int(calculate_rank(test_score24, 2024))
     print(f"{test_score24:.3f} Puan → 2024 Sıralama: {rank24}")
 
-    test_score25 = calculate_score(2025, 94, 30, 15, 25, 15, 30, 14, 13, 8)
+    test_score25 = calculate_score(2025, 83.42950, 36.5, 13, 24.5, 15.5, 34.5, 12.75, 11.75, 10.5)
     rank25 = int(calculate_rank(test_score25, 2025))
-    print(f"{test_score25:.3f} Puan → 2025Sıralama: {rank25}")
+    print(f"{test_score25:.3f} Puan → 2025 Sıralama: {rank25}")
 
     w_22 = 0.3073
     w_23 = 0.1927

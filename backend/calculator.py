@@ -4,36 +4,50 @@ from pathlib import Path
 
 class ValidationError(ValueError):
     """Net veya OBP değerlerinin geçersiz olduğu durumlar için."""
+
     pass
 
 
-def calculate_score(year, obp, tr, sos, mat, fen, mat2, fiz2, kimya2, biyo2):
+def calculate_score(
+    year,
+    obp,
+    tyt_turkce,
+    tyt_sosyal_bilimler,
+    tyt_matematik,
+    tyt_fen_bilimleri,
+    ayt_matematik,
+    ayt_fizik,
+    ayt_kimya,
+    ayt_biyoloji,
+):
     """
     Verilen yıl ve netlere göre YKS SAY puanı hesaplar.
     Geçersiz girdi durumunda ValidationError fırlatır.
     """
 
     # --- Validation ---
-    if obp < 0:
-        raise ValidationError("Ortaöğretim Başarı Puanı 0'dan küçük olamaz.")
-    if obp > 100:
-        raise ValidationError("Ortaöğretim Başarı Puanı 100'den büyük olamaz.")
-    if tr > 40:
-        raise ValidationError("Türkçe testinde 40 soru bulunmaktadır.")
-    if sos > 20:
-        raise ValidationError("Sosyal Bilimler testinde 20 soru bulunmaktadır.")
-    if mat > 40:
-        raise ValidationError("Matematik testinde 40 soru bulunmaktadır.")
-    if fen > 20:
-        raise ValidationError("Fen Bilimleri testinde 20 soru bulunmaktadır.")
-    if mat2 > 40:
-        raise ValidationError("Matematik 2 testinde 40 soru bulunmaktadır.")
-    if fiz2 > 14:
-        raise ValidationError("Fizik 2 testinde 14 soru bulunmaktadır.")
-    if kimya2 > 13:
-        raise ValidationError("Kimya 2 testinde 13 soru bulunmaktadır.")
-    if biyo2 > 13:
-        raise ValidationError("Biyoloji 2 testinde 13 soru bulunmaktadır.")
+    validation_rules = {
+        "TYT Türkçe": 0 <= tyt_turkce <= 40,
+        "TYT Sosyal": 0 <= tyt_sosyal_bilimler <= 20,
+        "TYT Matematik": 0 <= tyt_matematik <= 40,
+        "TYT Fen": 0 <= tyt_fen_bilimleri <= 20,
+        "AYT Matematik": 0 <= ayt_matematik <= 40,
+        "AYT Fizik": 0 <= ayt_fizik <= 14,
+        "AYT Kimya": 0 <= ayt_kimya <= 13,
+        "AYT Biyoloji": 0 <= ayt_biyoloji <= 13,
+    }
+
+    validation_error = [alan for alan, durum in validation_rules.items() if not durum]
+
+    if validation_error:
+        raise ValidationError(
+            f"Bu derslerin netlerinde bir hata var, lütfen düzenleyip tekrar deneyin: {', '.join(validation_error)}"
+        )
+
+    if not (50 <= obp <= 100):
+        raise ValidationError(
+            "Ortaöğretim Başarı Puanı (OBP) 50 ile 100 arasında olmalıdır."
+        )
 
     # --- Weights ---
     current_dir = Path(__file__).resolve().parent
@@ -45,17 +59,19 @@ def calculate_score(year, obp, tr, sos, mat, fen, mat2, fiz2, kimya2, biyo2):
     if str(year) not in weights:
         raise KeyError(f"{year} yılı için katsayı verisi bulunamadı.")
 
-    w = weights[str(year)]["say"]
+    w = weights[str(year)]
+    w_tyt = weights[str(year)]["tyt"]
+    w_ayt = weights[str(year)]["ayt"]
 
     return (
-        w["taban"]
-        + w["tr"]     * tr
-        + w["sos"]    * sos
-        + w["mat"]    * mat
-        + w["fen"]    * fen
-        + w["mat2"]   * mat2
-        + w["fiz2"]   * fiz2
-        + w["kimya2"] * kimya2
-        + w["biyo2"]  * biyo2
+        w["base_score"]
+        + w_tyt["turkce"] * tyt_turkce
+        + w_tyt["sosyal_bilimler"] * tyt_sosyal_bilimler
+        + w_tyt["matematik"] * tyt_matematik
+        + w_tyt["fen_bilimleri"] * tyt_fen_bilimleri
+        + w_ayt["matematik"] * ayt_matematik
+        + w_ayt["fizik"] * ayt_fizik
+        + w_ayt["kimya"] * ayt_kimya
+        + w_ayt["biyoloji"] * ayt_biyoloji
         + obp * 0.6
     )
