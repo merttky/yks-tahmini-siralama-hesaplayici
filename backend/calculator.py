@@ -19,4 +19,3 @@ def calculate_point(year, obp, tr, sos, mat, fen, mat2, fiz2, kimya2, biyo2):
         + obp * 0.6
     )
 
-print(calculate_point(2025, 100, 30, 10, 30, 6, 28, 10, 10, 0))
