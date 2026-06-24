@@ -5,6 +5,7 @@ YKS SAY Hesaplayıcı — FastAPI Backend
 
 from fastapi import FastAPI  # type: ignore
 from fastapi.middleware.cors import CORSMiddleware  # type: ignore
+from fastapi.staticfiles import StaticFiles  # type: ignore
 from pydantic import BaseModel, Field
 from pathlib import Path
 import sys
@@ -26,10 +27,18 @@ app.add_middleware(
 # Hesaplama yapılacak yıllar
 TARGET_YEARS = [2022, 2023, 2024, 2025]
 
+# 2026 tahmini sıralama için ağırlıklar
+TAHMIN_AGIRLIKLARI = {
+    2022: 0.3073,
+    2023: 0.1927,
+    2024: 0.1615,
+    2025: 0.3385,
+}
+
 
 class HesaplaRequest(BaseModel):
     obp: float = Field(
-        80.0, ge=50, le=100, description="Okul başarı puanı (100 üzerinden)"
+        80.0, ge=25, le=100, description="Okul başarı puanı (100 üzerinden, yerleşme durumunda /2)"
     )
 
     # TYT netler
@@ -53,6 +62,7 @@ class YilSonucu(BaseModel):
 class HesaplaResponse(BaseModel):
     success: bool
     sonuclar: dict[int, YilSonucu] | None = None
+    tahmin_2026: int | None = None
     hatalar: list[str] | None = None
 
 
@@ -60,6 +70,7 @@ class HesaplaResponse(BaseModel):
 def hesapla(req: HesaplaRequest):
     """
     Girilen netlere göre 2022'den 2025'e kadar olan yılların her biri için puan ve sıralama hesaplar.
+    Ardından ağırlıklı ortalama ile 2026 tahmini sıralamasını döndürür.
     """
     sonuclar: dict[int, YilSonucu] = {}
     hatalar: list[str] = []
@@ -91,9 +102,20 @@ def hesapla(req: HesaplaRequest):
         except Exception as e:
             hatalar.append(f"{year} yılı hesaplanamadı: {str(e)}")
 
+    # 2026 tahmini sıralama hesabı (ağırlıklı ortalama)
+    tahmin_2026 = None
+    if len(sonuclar) == len(TARGET_YEARS):
+        tahmin_2026 = round(
+            sum(
+                sonuclar[year].siralama * TAHMIN_AGIRLIKLARI[year]
+                for year in TARGET_YEARS
+            )
+        )
+
     return HesaplaResponse(
         success=bool(sonuclar),
         sonuclar=sonuclar if sonuclar else None,
+        tahmin_2026=tahmin_2026,
         hatalar=hatalar if hatalar else None,
     )
 
@@ -101,3 +123,9 @@ def hesapla(req: HesaplaRequest):
 @app.get("/health")
 def health():
     return {"status": "ok", "message": "API çalışıyor.", "yillar": TARGET_YEARS}
+
+
+# Frontend statik dosya sunumu
+frontend_path = Path(__file__).resolve().parent.parent / "frontend"
+if frontend_path.exists():
+    app.mount("/", StaticFiles(directory=str(frontend_path), html=True), name="frontend")

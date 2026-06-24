@@ -44,9 +44,9 @@ def calculate_score(
             f"Bu derslerin netlerinde bir hata var, lütfen düzenleyip tekrar deneyin: {', '.join(validation_error)}"
         )
 
-    if not (50 <= obp <= 100):
+    if not (25 <= obp <= 100):
         raise ValidationError(
-            "Ortaöğretim Başarı Puanı (OBP) 50 ile 100 arasında olmalıdır."
+            "Ortaöğretim Başarı Puanı (OBP) 25 ile 100 arasında olmalıdır."
         )
 
     # --- Weights ---
