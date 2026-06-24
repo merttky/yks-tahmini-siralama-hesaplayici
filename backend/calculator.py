@@ -1,8 +1,13 @@
 import json
+from pathlib import Path
 
 def calculate_point(year, obp, tr, sos, mat, fen, mat2, fiz2, kimya2, biyo2):
 
-    with open("data/weights.json", "r") as f:
+    current_dir = Path(__file__).resolve().parent
+
+    json_path = current_dir.parent / "data" / "weights.json"
+
+    with open(json_path, "r", encoding="utf-8") as f:
         weights = json.load(f)
         current_year_weights = weights[str(year)]["say"]
 
