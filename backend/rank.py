@@ -28,6 +28,6 @@ def calculate_rank(score, year):
                interval["d"]
     return max(1, round(rank))
 
-test_score = calculate_score(2025, 100, 41, 10, 30, 6, 28, 10, 10, 0)
+test_score = calculate_score(2025, 100, 4, 10, 30, 6, 28, 10, 10, 0)
 
 print(f"{test_score} Puan Sıralaması:", calculate_rank(test_score, 2025))
