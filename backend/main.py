@@ -6,7 +6,7 @@ YKS SAY Hesaplayıcı — FastAPI Backend
 from fastapi import FastAPI  # type: ignore
 from fastapi.middleware.cors import CORSMiddleware  # type: ignore
 from fastapi.staticfiles import StaticFiles  # type: ignore
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field # type: ignore 
 from pathlib import Path
 import sys
 
