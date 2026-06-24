@@ -2,7 +2,7 @@ import json
 
 def calculate_point(year, obp, tr, sos, mat, fen, mat2, fiz2, kimya2, biyo2):
 
-    with open("../data/weights.json", "r") as f:
+    with open("data/weights.json", "r") as f:
         weights = json.load(f)
         current_year_weights = weights[str(year)]["say"]
 
