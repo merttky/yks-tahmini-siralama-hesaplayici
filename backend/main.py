@@ -3,8 +3,8 @@ YKS SAY Hesaplayıcı — FastAPI Backend
 Çalıştırmak için: uvicorn main:app --reload
 """
 
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi import FastAPI # type: ignore
+from fastapi.middleware.cors import CORSMiddleware # type: ignore
 from pydantic import BaseModel, Field
 from pathlib import Path
 import sys
@@ -60,7 +60,7 @@ def hesapla(req: HesaplaRequest):
     Girilen netlere göre 2022–2025 yıllarının her biri için
     ayrı katsayılarla puan ve sıralama hesaplar.
     """
-    sonuclar: dict[int, dict] = {}
+    sonuclar: dict[int, YilSonucu] = {}
     hatalar: list[str] = []
 
     for year in TARGET_YEARS:
@@ -71,10 +71,7 @@ def hesapla(req: HesaplaRequest):
                 req.mat2, req.fiz2, req.kimya2, req.biyo2,
             )
             siralama = calculate_rank(puan, year)
-            sonuclar[year] = {
-                "puan":     round(puan, 3),
-                "siralama": siralama,
-            }
+            sonuclar[year] = YilSonucu(puan=round(puan, 3), siralama=siralama)
 
         except ValidationError as e:
             # Validation hatası tüm yıllar için aynı → erken dön
