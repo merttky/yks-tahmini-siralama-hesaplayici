@@ -10,7 +10,7 @@ class ValidationError(ValueError):
 
 def calculate_score(
     year,
-    obp,
+    obp_data,
     tyt_turkce,
     tyt_sosyal_bilimler,
     tyt_matematik,
@@ -24,6 +24,9 @@ def calculate_score(
     Verilen yıl ve netlere göre YKS SAY puanı hesaplar.
     Geçersiz girdi durumunda ValidationError fırlatır.
     """
+    print("OBP Data:", obp_data)  # Debugging line
+    obp = obp_data[0]  # OBP değeri
+    obp_halved = obp_data[1]  # OBP yarıya düşürülmüş mü?
 
     # --- Validation ---
     validation_rules = {
@@ -44,9 +47,14 @@ def calculate_score(
             f"Bu derslerin netlerinde bir hata var, lütfen düzenleyip tekrar deneyin: {', '.join(validation_error)}"
         )
 
-    if not (25 <= obp <= 100):
+    is_obp_valid = 50 <= obp <= 100 and not obp_halved
+
+    is_halved_obp_valid = 25 <= obp <= 50 and obp_halved
+
+    # Eğer geçerli durumlardan HİÇBİRİ sağlanmıyorsa hata fırlat
+    if not (is_obp_valid or is_halved_obp_valid):
         raise ValidationError(
-            "Ortaöğretim Başarı Puanı (OBP) 25 ile 100 arasında olmalıdır."
+            "Ortaöğretim Başarı Puanı (OBP) 50 ile 100 arasında olmalıdır."
         )
 
     # --- Weights ---

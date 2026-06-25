@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>YKS 2026 Tahmini Sıralama Hesaplayıcı — Sayısal</title>
+    <title>YKS Tahmini Sıralama Hesaplayıcı</title>
     <meta
       name="description"
       content="2022-2025 yıllarının verilerini kullanarak 2026 YKS Sayısal tahmini sıralamanızı hesaplayın. Doğru-yanlış sayılarınızı girin, tahmini sıralamanızı öğrenin."
@@ -19,11 +19,11 @@
       <header class="hero">
         <div class="hero-badge">
           <span class="dot"></span>
-          2026 Tahmini — Sayısal
+          2026 Tahmini
         </div>
         <h1>YKS Tahmini Sıralama Hesaplayıcı</h1>
         <p>
-          2022–2025 yıllarının verileriyle ağırlıklı analiz yaparak 2026 YKS
+          2022-2025 yıllarının verileriyle ağırlıklı analiz yaparak 2026 YKS
           Sayısal tahmini sıralamanızı hesaplayın.
         </p>
       </header>
@@ -48,7 +48,7 @@
                 <path d="M6 12v5c0 2 2.5 3 6 3s6-1 6-3v-5" />
               </svg>
             </div>
-            <h2 class="section-title">Ortaöğretim Başarı Puanı</h2>
+            <h2 class="section-title">Ortaöğretim Başarı Puanı (OBP)</h2>
           </div>
           <div class="obp-card">
             <div class="obp-row">
@@ -60,12 +60,12 @@
                   type="number"
                   id="obp-input"
                   onkeydown="if(!/[0-9\.]|Backspace|Tab|Delete|Arrow/.test(event.key)) event.preventDefault();"
-                  oninput="if(Number(this.value) > 100) this.value = 100;"
-                  onblur="if(Number(this.value) < 50) this.value = 50;"
+                  oninput="if(Number(this.value) > 100) { this.value = 100; } else if(this.value.includes('.')) { let p = this.value.split('.'); if(p[1].length > 5) this.value = p[0] + '.' + p[1].slice(0, 5); }"
+                  onblur="if(this.value !== '') { let num = parseFloat(this.value); if(num < 50) { this.value = 50; } else if(num > 100) { this.value = 100; } else { this.value = num; } }"
                   class="input-field obp-input-field"
                   min="50"
                   max="100"
-                  step="0.0000"
+                  step="0.00001"
                   placeholder="85.00"
                 />
               </div>
@@ -108,7 +108,7 @@
             </div>
             <h2 class="section-title">Temel Yeterlilik Testi (TYT)</h2>
             <div class="section-total">
-              <span class="section-total-label">Toplam Net</span>
+              <span class="section-total-label">Toplam Net:</span>
               <span class="section-total-value" id="tyt-toplam-net">0.00</span>
             </div>
           </div>
@@ -309,7 +309,7 @@
             </div>
             <h2 class="section-title">Alan Yeterlilik Testi (AYT)</h2>
             <div class="section-total">
-              <span class="section-total-label">Toplam Net</span>
+              <span class="section-total-label">Toplam Net:</span>
               <span class="section-total-value" id="ayt-toplam-net">0.00</span>
             </div>
           </div>

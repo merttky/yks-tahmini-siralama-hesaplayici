@@ -15,7 +15,7 @@
   const dom = {
     form: document.getElementById('yks-form'),
     obpInput: document.getElementById('obp-input'),
-    obpYarila: document.getElementById('obp-yarila'),
+    obpHalved: document.getElementById('obp-yarila'),
     btnHesapla: document.getElementById('btn-hesapla'),
     resultsSection: document.getElementById('results-section'),
     tahmin2026: document.getElementById('tahmin-2026-value'),
@@ -130,10 +130,6 @@
   function collectFormData() {
     let obp = parseFloat(dom.obpInput.value) || 80;
 
-    // Geçen sene yerleşme durumu: OBP yarıya düşür
-    if (dom.obpYarila.checked) {
-      obp = obp / 2;
-    }
     const nets = {};
 
     DERSLER.forEach((ders) => {
@@ -141,9 +137,9 @@
       const yanlis = parseInt(document.getElementById(`${ders}-yanlis`).value, 10) || 0;
       nets[ders] = calculateNet(dogru, yanlis);
     });
-
+    console.log([dom.obpHalved.checked ? (obp / 2) : obp, dom.obpHalved.checked])
     return {
-      obp,
+      obp_data: [dom.obpHalved.checked ? (obp / 2) : obp, dom.obpHalved.checked],
       tr: nets.tr,
       sos: nets.sos,
       mat: nets.mat,
@@ -189,7 +185,7 @@
 
   async function submitForm() {
     if (!validateAll()) {
-      showToast('Doğru ve yanlış toplamı soru sayısını aşamaz. Lütfen hatalı alanları düzeltin.');
+      showToast('Hatalı ya da eksik alanlar mevcut. Düzeltip tekrar deneyiniz.');
       return;
     }
 
@@ -199,7 +195,7 @@
     dom.btnHesapla.classList.add('loading');
 
     try {
-      const res = await fetch('/hesapla', {
+      const res = await fetch('/calculate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
@@ -207,6 +203,7 @@
 
       if (!res.ok) {
         const errData = await res.json().catch(() => null);
+        console.log(res.statusText, errData);
         throw new Error(errData?.detail || `Sunucu hatası: ${res.status}`);
       }
 

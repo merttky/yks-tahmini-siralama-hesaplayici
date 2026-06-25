@@ -37,9 +37,7 @@ TAHMIN_AGIRLIKLARI = {
 
 
 class HesaplaRequest(BaseModel):
-    obp: float = Field(
-        80.0, ge=25, le=100, description="Okul başarı puanı (100 üzerinden, yerleşme durumunda /2)"
-    )
+    obp_data: list = Field(..., description="Ortaöğretim Başarı Puanı (OBP) ve OBP yarıya düşürülmüş mü? [obp, obp_halved]")
 
     # TYT netler
     tr: float = Field(0.0, ge=-10.0, le=40.0, description="TYT Türkçe neti")
@@ -66,7 +64,7 @@ class HesaplaResponse(BaseModel):
     hatalar: list[str] | None = None
 
 
-@app.post("/hesapla", response_model=HesaplaResponse)
+@app.post("/calculate", response_model=HesaplaResponse)
 def hesapla(req: HesaplaRequest):
     """
     Girilen netlere göre 2022'den 2025'e kadar olan yılların her biri için puan ve sıralama hesaplar.
@@ -79,7 +77,7 @@ def hesapla(req: HesaplaRequest):
         try:
             puan = calculate_score(
                 year,
-                req.obp,
+                req.obp_data,
                 req.tr,
                 req.sos,
                 req.mat,
