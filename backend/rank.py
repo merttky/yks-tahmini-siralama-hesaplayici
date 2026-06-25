@@ -68,10 +68,10 @@ if __name__ == "__main__":
     rank25 = int(calculate_rank(test_score25, 2025))
     print(f"{test_score25:.3f} Puan → 2025 Sıralama: {rank25}")
 
-    w_22 = 0.3073
-    w_23 = 0.1927
-    w_24 = 0.1615
-    w_25 = 0.3385
+    w_22 = 0.3932
+    w_23 = 0.2961
+    w_24 = 0.1990
+    w_25 = 0.1117
 
     # Ağırlıklı ortalama hesaplama algoritması
     r_2026 = (rank22 * w_22) + (rank23 * w_23) + (rank24 * w_24) + (rank25 * w_25)
