@@ -90,9 +90,7 @@
   function getTotalNet(dersListesi) {
     let total = 0;
     dersListesi.forEach((ders) => {
-      const dogru = parseInt(document.getElementById(`${ders}-dogru`).value, 10) || 0;
-      const yanlis = parseInt(document.getElementById(`${ders}-yanlis`).value, 10) || 0;
-      total += calculateNet(dogru, yanlis);
+      total += parseFloat(document.getElementById(`${ders}-net`).innerText) || 0;
     });
     return total;
   }

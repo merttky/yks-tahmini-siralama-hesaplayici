@@ -1,320 +1,553 @@
 <!DOCTYPE html>
 <html lang="tr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YKS 2026 Tahmini Sıralama Hesaplayıcı — Sayısal</title>
-  <meta name="description" content="2022-2025 yıllarının verilerini kullanarak 2026 YKS Sayısal tahmini sıralamanızı hesaplayın. Doğru-yanlış sayılarınızı girin, tahmini sıralamanızı öğrenin." />
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YKS 2026 Tahmini Sıralama Hesaplayıcı — Sayısal</title>
+    <meta
+      name="description"
+      content="2022-2025 yıllarının verilerini kullanarak 2026 YKS Sayısal tahmini sıralamanızı hesaplayın. Doğru-yanlış sayılarınızı girin, tahmini sıralamanızı öğrenin."
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Animated Background -->
+    <div class="bg-gradient"></div>
 
-  <!-- Animated Background -->
-  <div class="bg-gradient"></div>
-
-  <div class="container">
-
-    <!-- ═══ Hero ═══ -->
-    <header class="hero">
-      <div class="hero-badge">
-        <span class="dot"></span>
-        2026 Tahmini — Sayısal
-      </div>
-      <h1>YKS Tahmini Sıralama Hesaplayıcı</h1>
-      <p>2022–2025 yıllarının verileriyle ağırlıklı analiz yaparak 2026 YKS Sayısal tahmini sıralamanızı hesaplayın.</p>
-    </header>
-
-    <form id="yks-form" autocomplete="off">
-
-      <!-- ═══ OBP ═══ -->
-      <section class="section" id="obp-section">
-        <div class="section-header">
-          <div class="section-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2.5 3 6 3s6-1 6-3v-5"/></svg>
-          </div>
-          <h2 class="section-title">Ortaöğretim Başarı Puanı</h2>
+    <div class="container">
+      <!-- ═══ Hero ═══ -->
+      <header class="hero">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          2026 Tahmini — Sayısal
         </div>
-        <div class="obp-card">
-          <div class="obp-row">
-            <div class="obp-input-group">
-              <label class="input-label" for="obp-input">OBP Değeri (50–100)</label>
-              <input
-                type="number"
-                id="obp-input"
-                class="input-field obp-input-field"
-                min="50"
-                max="100"
-                step="any"
-                value="80"
-                placeholder="80.00"
-              />
+        <h1>YKS Tahmini Sıralama Hesaplayıcı</h1>
+        <p>
+          2022–2025 yıllarının verileriyle ağırlıklı analiz yaparak 2026 YKS
+          Sayısal tahmini sıralamanızı hesaplayın.
+        </p>
+      </header>
+
+      <form id="yks-form" autocomplete="off">
+        <!-- ═══ OBP ═══ -->
+        <section class="section" id="obp-section">
+          <div class="section-header">
+            <div class="section-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                <path d="M6 12v5c0 2 2.5 3 6 3s6-1 6-3v-5" />
+              </svg>
+            </div>
+            <h2 class="section-title">Ortaöğretim Başarı Puanı</h2>
+          </div>
+          <div class="obp-card">
+            <div class="obp-row">
+              <div class="obp-input-group">
+                <label class="input-label" for="obp-input"
+                  >OBP Değeri (50–100)</label
+                >
+                <input
+                  type="number"
+                  id="obp-input"
+                  class="input-field obp-input-field"
+                  min="50"
+                  max="100"
+                  step="any"
+                  value="80"
+                  placeholder="80.00"
+                />
+              </div>
+            </div>
+            <div class="obp-checkbox-row">
+              <label class="checkbox-label" for="obp-yarila">
+                <input type="checkbox" id="obp-yarila" class="checkbox-input" />
+                <span class="checkbox-custom"></span>
+                <span class="checkbox-text"
+                  >Geçen sene bir üniversiteye yerleştim</span
+                >
+              </label>
+              <span class="checkbox-info"
+                >OBP değeri yarıya düşürülerek hesaplanır</span
+              >
             </div>
           </div>
-          <div class="obp-checkbox-row">
-            <label class="checkbox-label" for="obp-yarila">
-              <input type="checkbox" id="obp-yarila" class="checkbox-input" />
-              <span class="checkbox-custom"></span>
-              <span class="checkbox-text">Geçen sene bir üniversiteye yerleştim</span>
-            </label>
-            <span class="checkbox-info">OBP değeri yarıya düşürülerek hesaplanır</span>
+        </section>
+
+        <!-- ═══ TYT ═══ -->
+        <section class="section" id="tyt-section">
+          <div class="section-header">
+            <div class="section-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5v-15z"
+                />
+              </svg>
+            </div>
+            <h2 class="section-title">TYT — Temel Yeterlilik Testi</h2>
+            <div class="section-total">
+              <span class="section-total-label">Toplam Net</span>
+              <span class="section-total-value" id="tyt-toplam-net">0.00</span>
+            </div>
           </div>
+          <div class="ders-grid">
+            <!-- TYT Türkçe -->
+            <div class="ders-card" data-ders="tr" data-max="40">
+              <div class="ders-name">Türkçe</div>
+              <div class="ders-soru-info">40 soru</div>
+              <div class="ders-inputs">
+                <div class="input-group">
+                  <label class="input-label" for="tr-dogru">Doğru</label>
+                  <input
+                    type="number"
+                    id="tr-dogru"
+                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if (((Number(document.getElementById('tr-yanlis').value) || 0) + (Number(this.value) || 0)) > 40) this.value = Math.abs(40 - Number(document.getElementById('tr-yanlis').value));"
+                    class="input-field input-dogru"
+                    inputmode="numeric"
+                    maxlength="2"
+                    min="0"
+                    max="40"
+                    placeholder="0"
+                  />
+                </div>
+                <div class="input-group">
+                  <label class="input-label" for="tr-yanlis">Yanlış</label>
+                  <input
+                    type="number"
+                    id="tr-yanlis"
+                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('tr-dogru').value) || 0) + (Number(this.value) || 0) > 40) this.value = Math.abs(40 - Number(document.getElementById('tr-dogru').value));"
+                    class="input-field input-yanlis"
+                    inputmode="numeric"
+                    maxlength="2"
+                    min="0"
+                    max="40"
+                    placeholder="0"
+                  />
+                </div>
+              </div>
+              <div class="net-display">
+                <span class="net-label">Net</span>
+                <span class="net-value zero" id="tr-net">0.00</span>
+              </div>
+              <div class="validation-msg" id="tr-error"></div>
+            </div>
+
+            <!-- TYT Sosyal Bilimler -->
+            <div class="ders-card" data-ders="sos" data-max="20">
+              <div class="ders-name">Sosyal Bilimler</div>
+              <div class="ders-soru-info">20 soru</div>
+              <div class="ders-inputs">
+                <div class="input-group">
+                  <label class="input-label" for="sos-dogru">Doğru</label>
+                  <input
+                    type="number"
+                    id="sos-dogru"
+                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('sos-yanlis').value) || 0) + (Number(this.value) || 0) > 20) this.value = Math.abs(20 - Number(document.getElementById('sos-yanlis').value));"
+                    class="input-field input-dogru"
+                    inputmode="numeric"
+                    maxlength="2"
+                    min="0"
+                    max="20"
+                    placeholder="0"
+                  />
+                </div>
+                <div class="input-group">
+                  <label class="input-label" for="sos-yanlis">Yanlış</label>
+                  <input
+                    type="number"
+                    id="sos-yanlis"
+                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('sos-dogru').value) || 0) + (Number(this.value) || 0) > 20) this.value = Math.abs(20 - Number(document.getElementById('sos-dogru').value));"
+                    class="input-field input-yanlis"
+                    inputmode="numeric"
+                    maxlength="2"
+                    min="0"
+                    max="20"
+                    placeholder="0"
+                  />
+                </div>
+              </div>
+              <div class="net-display">
+                <span class="net-label">Net</span>
+                <span class="net-value zero" id="sos-net">0.00</span>
+              </div>
+              <div class="validation-msg" id="sos-error"></div>
+            </div>
+
+            <!-- TYT Temel Matematik -->
+            <div class="ders-card" data-ders="mat" data-max="40">
+              <div class="ders-name">Temel Matematik</div>
+              <div class="ders-soru-info">40 soru</div>
+              <div class="ders-inputs">
+                <div class="input-group">
+                  <label class="input-label" for="mat-dogru">Doğru</label>
+                  <input
+                    type="number"
+                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('mat-yanlis').value) || 0) + (Number(this.value) || 0) > 40) this.value = Math.abs(40 - Number(document.getElementById('mat-yanlis').value));"
+                    id="mat-dogru"
+                    class="input-field input-dogru"
+                    inputmode="numeric"
+                    maxlength="2"
+                    min="0"
+                    max="40"
+                    placeholder="0"
+                  />
+                </div>
+                <div class="input-group">
+                  <label class="input-label" for="mat-yanlis">Yanlış</label>
+                  <input
+                    type="number"
+                    id="mat-yanlis"
+                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('mat-dogru').value) || 0) + (Number(this.value) || 0) > 40) this.value = Math.abs(40 - Number(document.getElementById('mat-dogru').value));"
+                    class="input-field input-yanlis"
+                    inputmode="numeric"
+                    maxlength="2"
+                    min="0"
+                    max="40"
+                    placeholder="0"
+                  />
+                </div>
+              </div>
+              <div class="net-display">
+                <span class="net-label">Net</span>
+                <span class="net-value zero" id="mat-net">0.00</span>
+              </div>
+              <div class="validation-msg" id="mat-error"></div>
+            </div>
+
+            <!-- TYT Fen Bilimleri -->
+            <div class="ders-card" data-ders="fen" data-max="20">
+              <div class="ders-name">Fen Bilimleri</div>
+              <div class="ders-soru-info">20 soru</div>
+              <div class="ders-inputs">
+                <div class="input-group">
+                  <label class="input-label" for="fen-dogru">Doğru</label>
+                  <input
+                    type="number"
+                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('fen-yanlis').value) || 0) + (Number(this.value) || 0) > 20) this.value = Math.abs(20 - Number(document.getElementById('fen-yanlis').value));"
+                    id="fen-dogru"
+                    class="input-field input-dogru"
+                    inputmode="numeric"
+                    maxlength="2"
+                    min="0"
+                    max="20"
+                    placeholder="0"
+                  />
+                </div>
+                <div class="input-group">
+                  <label class="input-label" for="fen-yanlis">Yanlış</label>
+                  <input
+                    type="number"
+                    id="fen-yanlis"
+                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('fen-dogru').value) || 0) + (Number(this.value) || 0) > 20) this.value = Math.abs(20 - Number(document.getElementById('fen-dogru').value));"
+                    class="input-field input-yanlis"
+                    inputmode="numeric"
+                    maxlength="2"
+                    min="0"
+                    max="20"
+                    placeholder="0"
+                  />
+                </div>
+              </div>
+              <div class="net-display">
+                <span class="net-label">Net</span>
+                <span class="net-value zero" id="fen-net">0.00</span>
+              </div>
+              <div class="validation-msg" id="fen-error"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══ AYT SAY ═══ -->
+        <section class="section" id="ayt-section">
+          <div class="section-header">
+            <div class="section-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5v-15z"
+                />
+              </svg>
+            </div>
+            <h2 class="section-title">AYT — Sayısal</h2>
+            <div class="section-total">
+              <span class="section-total-label">Toplam Net</span>
+              <span class="section-total-value" id="ayt-toplam-net">0.00</span>
+            </div>
+          </div>
+          <div class="ders-grid">
+            <!-- AYT Matematik -->
+            <div class="ders-card" data-ders="mat2" data-max="40">
+              <div class="ders-name">Matematik</div>
+              <div class="ders-soru-info">40 soru</div>
+              <div class="ders-inputs">
+                <div class="input-group">
+                  <label class="input-label" for="mat2-dogru">Doğru</label>
+                  <input
+                    type="number"
+                    id="mat2-dogru"
+                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('mat2-yanlis').value) || 0) + (Number(this.value) || 0) > 40) this.value = Math.abs(40 - Number(document.getElementById('mat2-yanlis').value));"
+                    class="input-field input-dogru"
+                    inputmode="numeric"
+                    maxlength="2"
+                    min="0"
+                    max="40"
+                    placeholder="0"
+                  />
+                </div>
+                <div class="input-group">
+                  <label class="input-label" for="mat2-yanlis">Yanlış</label>
+                  <input
+                    type="number"
+                    id="mat2-yanlis"
+                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('mat2-dogru').value) || 0) + (Number(this.value) || 0) > 40) this.value = Math.abs(40 - Number(document.getElementById('mat2-dogru').value));"
+                    class="input-field input-yanlis"
+                    inputmode="numeric"
+                    maxlength="2"
+                    min="0"
+                    max="40"
+                    placeholder="0"
+                  />
+                </div>
+              </div>
+              <div class="net-display">
+                <span class="net-label">Net</span>
+                <span class="net-value zero" id="mat2-net">0.00</span>
+              </div>
+              <div class="validation-msg" id="mat2-error"></div>
+            </div>
+
+            <!-- AYT Fizik -->
+            <div class="ders-card" data-ders="fiz2" data-max="14">
+              <div class="ders-name">Fizik</div>
+              <div class="ders-soru-info">14 soru</div>
+              <div class="ders-inputs">
+                <div class="input-group">
+                  <label class="input-label" for="fiz2-dogru">Doğru</label>
+                  <input
+                    type="number"
+                    id="fiz2-dogru"
+                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('fiz2-yanlis').value) || 0) + (Number(this.value) || 0) > 14) this.value = Math.abs(14 - Number(document.getElementById('fiz2-yanlis').value));"
+                    class="input-field input-dogru"
+                    inputmode="numeric"
+                    maxlength="2"
+                    min="0"
+                    max="14"
+                    placeholder="0"
+                  />
+                </div>
+                <div class="input-group">
+                  <label class="input-label" for="fiz2-yanlis">Yanlış</label>
+                  <input
+                    type="number"
+                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('fiz2-dogru').value) || 0) + (Number(this.value) || 0) > 14) this.value = Math.abs(14 - Number(document.getElementById('fiz2-dogru').value));"
+                    id="fiz2-yanlis"
+                    class="input-field input-yanlis"
+                    inputmode="numeric"
+                    maxlength="2"
+                    min="0"
+                    max="14"
+                    placeholder="0"
+                  />
+                </div>
+              </div>
+              <div class="net-display">
+                <span class="net-label">Net</span>
+                <span class="net-value zero" id="fiz2-net">0.00</span>
+              </div>
+              <div class="validation-msg" id="fiz2-error"></div>
+            </div>
+
+            <!-- AYT Kimya -->
+            <div class="ders-card" data-ders="kimya2" data-max="13">
+              <div class="ders-name">Kimya</div>
+              <div class="ders-soru-info">13 soru</div>
+              <div class="ders-inputs">
+                <div class="input-group">
+                  <label class="input-label" for="kimya2-dogru">Doğru</label>
+                  <input
+                    type="number"
+                    id="kimya2-dogru"
+                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('kimya2-yanlis').value) || 0) + (Number(this.value) || 0) > 13) this.value = Math.abs(13 - Number(document.getElementById('kimya2-yanlis').value));"
+                    class="input-field input-dogru"
+                    inputmode="numeric"
+                    maxlength="2"
+                    min="0"
+                    max="13"
+                    placeholder="0"
+                  />
+                </div>
+                <div class="input-group">
+                  <label class="input-label" for="kimya2-yanlis">Yanlış</label>
+                  <input
+                    type="number"
+                    id="kimya2-yanlis"
+                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('kimya2-dogru').value) || 0) + (Number(this.value) || 0) > 13) this.value = Math.abs(13 - Number(document.getElementById('kimya2-dogru').value));"
+                    class="input-field input-yanlis"
+                    inputmode="numeric"
+                    maxlength="2"
+                    min="0"
+                    max="13"
+                    placeholder="0"
+                  />
+                </div>
+              </div>
+              <div class="net-display">
+                <span class="net-label">Net</span>
+                <span class="net-value zero" id="kimya2-net">0.00</span>
+              </div>
+              <div class="validation-msg" id="kimya2-error"></div>
+            </div>
+
+            <!-- AYT Biyoloji -->
+            <div class="ders-card" data-ders="biyo2" data-max="13">
+              <div class="ders-name">Biyoloji</div>
+              <div class="ders-soru-info">13 soru</div>
+              <div class="ders-inputs">
+                <div class="input-group">
+                  <label class="input-label" for="biyo2-dogru">Doğru</label>
+                  <input
+                    type="number"
+                    id="biyo2-dogru"
+                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('biyo2-yanlis').value) || 0) + (Number(this.value) || 0) > 13) this.value = Math.abs(13 - Number(document.getElementById('biyo2-yanlis').value));"
+                    class="input-field input-dogru"
+                    inputmode="numeric"
+                    maxlength="2"
+                    min="0"
+                    max="13"
+                    placeholder="0"
+                  />
+                </div>
+                <div class="input-group">
+                  <label class="input-label" for="biyo2-yanlis">Yanlış</label>
+                  <input
+                    type="number"
+                    id="biyo2-yanlis"
+                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('biyo2-dogru').value) || 0) + (Number(this.value) || 0) > 13) this.value = Math.abs(13 - Number(document.getElementById('biyo2-dogru').value));"
+                    class="input-field input-yanlis"
+                    inputmode="numeric"
+                    maxlength="2"
+                    min="0"
+                    max="13"
+                    placeholder="0"
+                  />
+                </div>
+              </div>
+              <div class="net-display">
+                <span class="net-label">Net</span>
+                <span class="net-value zero" id="biyo2-net">0.00</span>
+              </div>
+              <div class="validation-msg" id="biyo2-error"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══ Submit ═══ -->
+        <div class="hesapla-wrapper">
+          <button type="submit" class="btn-hesapla" id="btn-hesapla">
+            <span class="spinner"></span>
+            <span class="btn-text">Sıralamayı Hesapla</span>
+          </button>
+        </div>
+      </form>
+
+      <!-- ═══ Results ═══ -->
+      <section class="results-section" id="results-section">
+        <div class="section-header">
+          <div class="section-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="18" y1="20" x2="18" y2="10" />
+              <line x1="12" y1="20" x2="12" y2="4" />
+              <line x1="6" y1="20" x2="6" y2="14" />
+            </svg>
+          </div>
+          <h2 class="section-title">Sonuçlar</h2>
+        </div>
+
+        <!-- 2026 Tahmin -->
+        <div class="tahmin-card">
+          <div class="tahmin-label">2026 Tahmini Sıralama</div>
+          <div class="tahmin-value" id="tahmin-2026-value">—</div>
+          <div class="tahmin-desc">Ağırlıklı ortalama ile hesaplanmıştır</div>
+        </div>
+
+        <!-- Yıl Kartları -->
+        <div class="section-header">
+          <div class="section-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+            </svg>
+          </div>
+          <h2 class="section-title">Yıllara Göre Detay</h2>
+        </div>
+
+        <div class="yil-grid" id="yil-grid">
+          <!-- JS tarafından doldurulacak -->
         </div>
       </section>
 
-      <!-- ═══ TYT ═══ -->
-      <section class="section" id="tyt-section">
-        <div class="section-header">
-          <div class="section-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5v-15z"/></svg>
-          </div>
-          <h2 class="section-title">TYT — Temel Yeterlilik Testi</h2>
-          <div class="section-total">
-            <span class="section-total-label">Toplam Net</span>
-            <span class="section-total-value" id="tyt-toplam-net">0.00</span>
-          </div>
-        </div>
-        <div class="ders-grid">
+      <!-- ═══ Footer ═══ -->
+      <footer class="footer">
+        <p>YKS 2026 Tahmini Sıralama Hesaplayıcı — Sayısal</p>
+        <p style="margin-top: 4px">
+          Hesaplamalar tahmini olup resmi sonuçlardan farklılık gösterebilir.
+        </p>
+      </footer>
+    </div>
 
-          <!-- TYT Türkçe -->
-          <div class="ders-card" data-ders="tr" data-max="40">
-            <div class="ders-name">Türkçe</div>
-            <div class="ders-soru-info">40 soru</div>
-            <div class="ders-inputs">
-              <div class="input-group">
-                <label class="input-label" for="tr-dogru">Doğru</label>
-                <input type="number" id="tr-dogru" class="input-field input-dogru" min="0" max="40" value="0" placeholder="0" />
-              </div>
-              <div class="input-group">
-                <label class="input-label" for="tr-yanlis">Yanlış</label>
-                <input type="number" id="tr-yanlis" class="input-field input-yanlis" min="0" max="40" value="0" placeholder="0" />
-              </div>
-            </div>
-            <div class="net-display">
-              <span class="net-label">Net</span>
-              <span class="net-value zero" id="tr-net">0.00</span>
-            </div>
-            <div class="validation-msg" id="tr-error"></div>
-          </div>
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
 
-          <!-- TYT Sosyal Bilimler -->
-          <div class="ders-card" data-ders="sos" data-max="20">
-            <div class="ders-name">Sosyal Bilimler</div>
-            <div class="ders-soru-info">20 soru</div>
-            <div class="ders-inputs">
-              <div class="input-group">
-                <label class="input-label" for="sos-dogru">Doğru</label>
-                <input type="number" id="sos-dogru" class="input-field input-dogru" min="0" max="20" value="0" placeholder="0" />
-              </div>
-              <div class="input-group">
-                <label class="input-label" for="sos-yanlis">Yanlış</label>
-                <input type="number" id="sos-yanlis" class="input-field input-yanlis" min="0" max="20" value="0" placeholder="0" />
-              </div>
-            </div>
-            <div class="net-display">
-              <span class="net-label">Net</span>
-              <span class="net-value zero" id="sos-net">0.00</span>
-            </div>
-            <div class="validation-msg" id="sos-error"></div>
-          </div>
-
-          <!-- TYT Temel Matematik -->
-          <div class="ders-card" data-ders="mat" data-max="40">
-            <div class="ders-name">Temel Matematik</div>
-            <div class="ders-soru-info">40 soru</div>
-            <div class="ders-inputs">
-              <div class="input-group">
-                <label class="input-label" for="mat-dogru">Doğru</label>
-                <input type="number" id="mat-dogru" class="input-field input-dogru" min="0" max="40" value="0" placeholder="0" />
-              </div>
-              <div class="input-group">
-                <label class="input-label" for="mat-yanlis">Yanlış</label>
-                <input type="number" id="mat-yanlis" class="input-field input-yanlis" min="0" max="40" value="0" placeholder="0" />
-              </div>
-            </div>
-            <div class="net-display">
-              <span class="net-label">Net</span>
-              <span class="net-value zero" id="mat-net">0.00</span>
-            </div>
-            <div class="validation-msg" id="mat-error"></div>
-          </div>
-
-          <!-- TYT Fen Bilimleri -->
-          <div class="ders-card" data-ders="fen" data-max="20">
-            <div class="ders-name">Fen Bilimleri</div>
-            <div class="ders-soru-info">20 soru</div>
-            <div class="ders-inputs">
-              <div class="input-group">
-                <label class="input-label" for="fen-dogru">Doğru</label>
-                <input type="number" id="fen-dogru" class="input-field input-dogru" min="0" max="20" value="0" placeholder="0" />
-              </div>
-              <div class="input-group">
-                <label class="input-label" for="fen-yanlis">Yanlış</label>
-                <input type="number" id="fen-yanlis" class="input-field input-yanlis" min="0" max="20" value="0" placeholder="0" />
-              </div>
-            </div>
-            <div class="net-display">
-              <span class="net-label">Net</span>
-              <span class="net-value zero" id="fen-net">0.00</span>
-            </div>
-            <div class="validation-msg" id="fen-error"></div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- ═══ AYT SAY ═══ -->
-      <section class="section" id="ayt-section">
-        <div class="section-header">
-          <div class="section-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5v-15z"/></svg>
-          </div>
-          <h2 class="section-title">AYT — Sayısal</h2>
-          <div class="section-total">
-            <span class="section-total-label">Toplam Net</span>
-            <span class="section-total-value" id="ayt-toplam-net">0.00</span>
-          </div>
-        </div>
-        <div class="ders-grid">
-
-          <!-- AYT Matematik -->
-          <div class="ders-card" data-ders="mat2" data-max="40">
-            <div class="ders-name">Matematik</div>
-            <div class="ders-soru-info">40 soru</div>
-            <div class="ders-inputs">
-              <div class="input-group">
-                <label class="input-label" for="mat2-dogru">Doğru</label>
-                <input type="number" id="mat2-dogru" class="input-field input-dogru" min="0" max="40" value="0" placeholder="0" />
-              </div>
-              <div class="input-group">
-                <label class="input-label" for="mat2-yanlis">Yanlış</label>
-                <input type="number" id="mat2-yanlis" class="input-field input-yanlis" min="0" max="40" value="0" placeholder="0" />
-              </div>
-            </div>
-            <div class="net-display">
-              <span class="net-label">Net</span>
-              <span class="net-value zero" id="mat2-net">0.00</span>
-            </div>
-            <div class="validation-msg" id="mat2-error"></div>
-          </div>
-
-          <!-- AYT Fizik -->
-          <div class="ders-card" data-ders="fiz2" data-max="14">
-            <div class="ders-name">Fizik</div>
-            <div class="ders-soru-info">14 soru</div>
-            <div class="ders-inputs">
-              <div class="input-group">
-                <label class="input-label" for="fiz2-dogru">Doğru</label>
-                <input type="number" id="fiz2-dogru" class="input-field input-dogru" min="0" max="14" value="0" placeholder="0" />
-              </div>
-              <div class="input-group">
-                <label class="input-label" for="fiz2-yanlis">Yanlış</label>
-                <input type="number" id="fiz2-yanlis" class="input-field input-yanlis" min="0" max="14" value="0" placeholder="0" />
-              </div>
-            </div>
-            <div class="net-display">
-              <span class="net-label">Net</span>
-              <span class="net-value zero" id="fiz2-net">0.00</span>
-            </div>
-            <div class="validation-msg" id="fiz2-error"></div>
-          </div>
-
-          <!-- AYT Kimya -->
-          <div class="ders-card" data-ders="kimya2" data-max="13">
-            <div class="ders-name">Kimya</div>
-            <div class="ders-soru-info">13 soru</div>
-            <div class="ders-inputs">
-              <div class="input-group">
-                <label class="input-label" for="kimya2-dogru">Doğru</label>
-                <input type="number" id="kimya2-dogru" class="input-field input-dogru" min="0" max="13" value="0" placeholder="0" />
-              </div>
-              <div class="input-group">
-                <label class="input-label" for="kimya2-yanlis">Yanlış</label>
-                <input type="number" id="kimya2-yanlis" class="input-field input-yanlis" min="0" max="13" value="0" placeholder="0" />
-              </div>
-            </div>
-            <div class="net-display">
-              <span class="net-label">Net</span>
-              <span class="net-value zero" id="kimya2-net">0.00</span>
-            </div>
-            <div class="validation-msg" id="kimya2-error"></div>
-          </div>
-
-          <!-- AYT Biyoloji -->
-          <div class="ders-card" data-ders="biyo2" data-max="13">
-            <div class="ders-name">Biyoloji</div>
-            <div class="ders-soru-info">13 soru</div>
-            <div class="ders-inputs">
-              <div class="input-group">
-                <label class="input-label" for="biyo2-dogru">Doğru</label>
-                <input type="number" id="biyo2-dogru" class="input-field input-dogru" min="0" max="13" value="0" placeholder="0" />
-              </div>
-              <div class="input-group">
-                <label class="input-label" for="biyo2-yanlis">Yanlış</label>
-                <input type="number" id="biyo2-yanlis" class="input-field input-yanlis" min="0" max="13" value="0" placeholder="0" />
-              </div>
-            </div>
-            <div class="net-display">
-              <span class="net-label">Net</span>
-              <span class="net-value zero" id="biyo2-net">0.00</span>
-            </div>
-            <div class="validation-msg" id="biyo2-error"></div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- ═══ Submit ═══ -->
-      <div class="hesapla-wrapper">
-        <button type="submit" class="btn-hesapla" id="btn-hesapla">
-          <span class="spinner"></span>
-          <span class="btn-text">Sıralamayı Hesapla</span>
-        </button>
-      </div>
-
-    </form>
-
-    <!-- ═══ Results ═══ -->
-    <section class="results-section" id="results-section">
-
-      <div class="section-header">
-        <div class="section-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-        </div>
-        <h2 class="section-title">Sonuçlar</h2>
-      </div>
-
-      <!-- 2026 Tahmin -->
-      <div class="tahmin-card">
-        <div class="tahmin-label">2026 Tahmini Sıralama</div>
-        <div class="tahmin-value" id="tahmin-2026-value">—</div>
-        <div class="tahmin-desc">Ağırlıklı ortalama ile hesaplanmıştır</div>
-      </div>
-
-      <!-- Yıl Kartları -->
-      <div class="section-header">
-        <div class="section-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        </div>
-        <h2 class="section-title">Yıllara Göre Detay</h2>
-      </div>
-
-      <div class="yil-grid" id="yil-grid">
-        <!-- JS tarafından doldurulacak -->
-      </div>
-
-    </section>
-
-    <!-- ═══ Footer ═══ -->
-    <footer class="footer">
-      <p>YKS 2026 Tahmini Sıralama Hesaplayıcı — Sayısal</p>
-      <p style="margin-top: 4px;">Hesaplamalar tahmini olup resmi sonuçlardan farklılık gösterebilir.</p>
-    </footer>
-
-  </div>
-
-  <!-- Toast -->
-  <div class="toast" id="toast"></div>
-
-  <script src="app.js"></script>
-</body>
+    <script src="app.js"></script>
+  </body>
 </html>
