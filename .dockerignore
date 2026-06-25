@@ -1,4 +1,7 @@
+venv
 .venv
+backend/venv
+backend/.venv
 .git
 .DS_Store
 __pycache__
