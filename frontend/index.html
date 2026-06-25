@@ -59,12 +59,14 @@
                 <input
                   type="number"
                   id="obp-input"
+                  onkeydown="if(!/[0-9\.]|Backspace|Tab|Delete|Arrow/.test(event.key)) event.preventDefault();"
+                  oninput="if(Number(this.value) > 100) this.value = 100;"
+                  onblur="if(Number(this.value) < 50) this.value = 50;"
                   class="input-field obp-input-field"
                   min="50"
                   max="100"
-                  step="any"
-                  value="80"
-                  placeholder="80.00"
+                  step="0.0000"
+                  placeholder="85.00"
                 />
               </div>
             </div>
@@ -73,11 +75,12 @@
                 <input type="checkbox" id="obp-yarila" class="checkbox-input" />
                 <span class="checkbox-custom"></span>
                 <span class="checkbox-text"
-                  >Geçen sene bir üniversiteye yerleştim</span
+                  >Geçen sene bir üniversite eğitim programına
+                  yerleştirildim</span
                 >
               </label>
-              <span class="checkbox-info"
-                >OBP değeri yarıya düşürülerek hesaplanır</span
+              <span class="checkbox-info" style="margin-left: -5px"
+                >(OBP yarı değerine düşürülerek hesaplanacaktır)</span
               >
             </div>
           </div>
@@ -103,7 +106,7 @@
                 />
               </svg>
             </div>
-            <h2 class="section-title">TYT — Temel Yeterlilik Testi</h2>
+            <h2 class="section-title">Temel Yeterlilik Testi (TYT)</h2>
             <div class="section-total">
               <span class="section-total-label">Toplam Net</span>
               <span class="section-total-value" id="tyt-toplam-net">0.00</span>
@@ -120,7 +123,8 @@
                   <input
                     type="number"
                     id="tr-dogru"
-                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if (((Number(document.getElementById('tr-yanlis').value) || 0) + (Number(this.value) || 0)) > 40) this.value = Math.abs(40 - Number(document.getElementById('tr-yanlis').value));"
+                    onkeydown="if(!/[0-9]|Backspace|Tab|Delete|Arrow/.test(event.key)) event.preventDefault();"
+                    oninput="this.value = this.value.replace('.', '');if(this.value.length > 2) this.value = this.value.slice(0, 2); if (((Number(document.getElementById('tr-yanlis').value) || 0) + (Number(this.value) || 0)) > 40) this.value = Math.abs(40 - Number(document.getElementById('tr-yanlis').value));"
                     class="input-field input-dogru"
                     inputmode="numeric"
                     maxlength="2"
@@ -134,7 +138,8 @@
                   <input
                     type="number"
                     id="tr-yanlis"
-                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('tr-dogru').value) || 0) + (Number(this.value) || 0) > 40) this.value = Math.abs(40 - Number(document.getElementById('tr-dogru').value));"
+                    onkeydown="if(!/[0-9]|Backspace|Tab|Delete|Arrow/.test(event.key)) event.preventDefault();"
+                    oninput="this.value = this.value.replace('.', '');if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('tr-dogru').value) || 0) + (Number(this.value) || 0) > 40) this.value = Math.abs(40 - Number(document.getElementById('tr-dogru').value));"
                     class="input-field input-yanlis"
                     inputmode="numeric"
                     maxlength="2"
@@ -161,7 +166,8 @@
                   <input
                     type="number"
                     id="sos-dogru"
-                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('sos-yanlis').value) || 0) + (Number(this.value) || 0) > 20) this.value = Math.abs(20 - Number(document.getElementById('sos-yanlis').value));"
+                    onkeydown="if(!/[0-9]|Backspace|Tab|Delete|Arrow/.test(event.key)) event.preventDefault();"
+                    oninput="this.value = this.value.replace('.', '');if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('sos-yanlis').value) || 0) + (Number(this.value) || 0) > 20) this.value = Math.abs(20 - Number(document.getElementById('sos-yanlis').value));"
                     class="input-field input-dogru"
                     inputmode="numeric"
                     maxlength="2"
@@ -175,7 +181,8 @@
                   <input
                     type="number"
                     id="sos-yanlis"
-                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('sos-dogru').value) || 0) + (Number(this.value) || 0) > 20) this.value = Math.abs(20 - Number(document.getElementById('sos-dogru').value));"
+                    onkeydown="if(!/[0-9]|Backspace|Tab|Delete|Arrow/.test(event.key)) event.preventDefault();"
+                    oninput="this.value = this.value.replace('.', '');if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('sos-dogru').value) || 0) + (Number(this.value) || 0) > 20) this.value = Math.abs(20 - Number(document.getElementById('sos-dogru').value));"
                     class="input-field input-yanlis"
                     inputmode="numeric"
                     maxlength="2"
@@ -201,7 +208,8 @@
                   <label class="input-label" for="mat-dogru">Doğru</label>
                   <input
                     type="number"
-                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('mat-yanlis').value) || 0) + (Number(this.value) || 0) > 40) this.value = Math.abs(40 - Number(document.getElementById('mat-yanlis').value));"
+                    onkeydown="if(!/[0-9]|Backspace|Tab|Delete|Arrow/.test(event.key)) event.preventDefault();"
+                    oninput="this.value = this.value.replace('.', '');if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('mat-yanlis').value) || 0) + (Number(this.value) || 0) > 40) this.value = Math.abs(40 - Number(document.getElementById('mat-yanlis').value));"
                     id="mat-dogru"
                     class="input-field input-dogru"
                     inputmode="numeric"
@@ -216,7 +224,8 @@
                   <input
                     type="number"
                     id="mat-yanlis"
-                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('mat-dogru').value) || 0) + (Number(this.value) || 0) > 40) this.value = Math.abs(40 - Number(document.getElementById('mat-dogru').value));"
+                    onkeydown="if(!/[0-9]|Backspace|Tab|Delete|Arrow/.test(event.key)) event.preventDefault();"
+                    oninput="this.value = this.value.replace('.', '');if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('mat-dogru').value) || 0) + (Number(this.value) || 0) > 40) this.value = Math.abs(40 - Number(document.getElementById('mat-dogru').value));"
                     class="input-field input-yanlis"
                     inputmode="numeric"
                     maxlength="2"
@@ -242,7 +251,8 @@
                   <label class="input-label" for="fen-dogru">Doğru</label>
                   <input
                     type="number"
-                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('fen-yanlis').value) || 0) + (Number(this.value) || 0) > 20) this.value = Math.abs(20 - Number(document.getElementById('fen-yanlis').value));"
+                    onkeydown="if(!/[0-9]|Backspace|Tab|Delete|Arrow/.test(event.key)) event.preventDefault();"
+                    oninput="this.value = this.value.replace('.', '');if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('fen-yanlis').value) || 0) + (Number(this.value) || 0) > 20) this.value = Math.abs(20 - Number(document.getElementById('fen-yanlis').value));"
                     id="fen-dogru"
                     class="input-field input-dogru"
                     inputmode="numeric"
@@ -257,7 +267,8 @@
                   <input
                     type="number"
                     id="fen-yanlis"
-                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('fen-dogru').value) || 0) + (Number(this.value) || 0) > 20) this.value = Math.abs(20 - Number(document.getElementById('fen-dogru').value));"
+                    onkeydown="if(!/[0-9]|Backspace|Tab|Delete|Arrow/.test(event.key)) event.preventDefault();"
+                    oninput="this.value = this.value.replace('.', '');if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('fen-dogru').value) || 0) + (Number(this.value) || 0) > 20) this.value = Math.abs(20 - Number(document.getElementById('fen-dogru').value));"
                     class="input-field input-yanlis"
                     inputmode="numeric"
                     maxlength="2"
@@ -296,7 +307,7 @@
                 />
               </svg>
             </div>
-            <h2 class="section-title">AYT — Sayısal</h2>
+            <h2 class="section-title">Alan Yeterlilik Testi (AYT)</h2>
             <div class="section-total">
               <span class="section-total-label">Toplam Net</span>
               <span class="section-total-value" id="ayt-toplam-net">0.00</span>
@@ -313,7 +324,8 @@
                   <input
                     type="number"
                     id="mat2-dogru"
-                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('mat2-yanlis').value) || 0) + (Number(this.value) || 0) > 40) this.value = Math.abs(40 - Number(document.getElementById('mat2-yanlis').value));"
+                    onkeydown="if(!/[0-9]|Backspace|Tab|Delete|Arrow/.test(event.key)) event.preventDefault();"
+                    oninput="this.value = this.value.replace('.', '');if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('mat2-yanlis').value) || 0) + (Number(this.value) || 0) > 40) this.value = Math.abs(40 - Number(document.getElementById('mat2-yanlis').value));"
                     class="input-field input-dogru"
                     inputmode="numeric"
                     maxlength="2"
@@ -327,7 +339,8 @@
                   <input
                     type="number"
                     id="mat2-yanlis"
-                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('mat2-dogru').value) || 0) + (Number(this.value) || 0) > 40) this.value = Math.abs(40 - Number(document.getElementById('mat2-dogru').value));"
+                    onkeydown="if(!/[0-9]|Backspace|Tab|Delete|Arrow/.test(event.key)) event.preventDefault();"
+                    oninput="this.value = this.value.replace('.', '');if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('mat2-dogru').value) || 0) + (Number(this.value) || 0) > 40) this.value = Math.abs(40 - Number(document.getElementById('mat2-dogru').value));"
                     class="input-field input-yanlis"
                     inputmode="numeric"
                     maxlength="2"
@@ -354,7 +367,8 @@
                   <input
                     type="number"
                     id="fiz2-dogru"
-                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('fiz2-yanlis').value) || 0) + (Number(this.value) || 0) > 14) this.value = Math.abs(14 - Number(document.getElementById('fiz2-yanlis').value));"
+                    onkeydown="if(!/[0-9]|Backspace|Tab|Delete|Arrow/.test(event.key)) event.preventDefault();"
+                    oninput="this.value = this.value.replace('.', '');if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('fiz2-yanlis').value) || 0) + (Number(this.value) || 0) > 14) this.value = Math.abs(14 - Number(document.getElementById('fiz2-yanlis').value));"
                     class="input-field input-dogru"
                     inputmode="numeric"
                     maxlength="2"
@@ -367,7 +381,8 @@
                   <label class="input-label" for="fiz2-yanlis">Yanlış</label>
                   <input
                     type="number"
-                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('fiz2-dogru').value) || 0) + (Number(this.value) || 0) > 14) this.value = Math.abs(14 - Number(document.getElementById('fiz2-dogru').value));"
+                    onkeydown="if(!/[0-9]|Backspace|Tab|Delete|Arrow/.test(event.key)) event.preventDefault();"
+                    oninput="this.value = this.value.replace('.', '');if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('fiz2-dogru').value) || 0) + (Number(this.value) || 0) > 14) this.value = Math.abs(14 - Number(document.getElementById('fiz2-dogru').value));"
                     id="fiz2-yanlis"
                     class="input-field input-yanlis"
                     inputmode="numeric"
@@ -395,7 +410,8 @@
                   <input
                     type="number"
                     id="kimya2-dogru"
-                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('kimya2-yanlis').value) || 0) + (Number(this.value) || 0) > 13) this.value = Math.abs(13 - Number(document.getElementById('kimya2-yanlis').value));"
+                    onkeydown="if(!/[0-9]|Backspace|Tab|Delete|Arrow/.test(event.key)) event.preventDefault();"
+                    oninput="this.value = this.value.replace('.', '');if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('kimya2-yanlis').value) || 0) + (Number(this.value) || 0) > 13) this.value = Math.abs(13 - Number(document.getElementById('kimya2-yanlis').value));"
                     class="input-field input-dogru"
                     inputmode="numeric"
                     maxlength="2"
@@ -409,7 +425,8 @@
                   <input
                     type="number"
                     id="kimya2-yanlis"
-                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('kimya2-dogru').value) || 0) + (Number(this.value) || 0) > 13) this.value = Math.abs(13 - Number(document.getElementById('kimya2-dogru').value));"
+                    onkeydown="if(!/[0-9]|Backspace|Tab|Delete|Arrow/.test(event.key)) event.preventDefault();"
+                    oninput="this.value = this.value.replace('.', '');if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('kimya2-dogru').value) || 0) + (Number(this.value) || 0) > 13) this.value = Math.abs(13 - Number(document.getElementById('kimya2-dogru').value));"
                     class="input-field input-yanlis"
                     inputmode="numeric"
                     maxlength="2"
@@ -436,7 +453,8 @@
                   <input
                     type="number"
                     id="biyo2-dogru"
-                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('biyo2-yanlis').value) || 0) + (Number(this.value) || 0) > 13) this.value = Math.abs(13 - Number(document.getElementById('biyo2-yanlis').value));"
+                    onkeydown="if(!/[0-9]|Backspace|Tab|Delete|Arrow/.test(event.key)) event.preventDefault();"
+                    oninput="this.value = this.value.replace('.', '');if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('biyo2-yanlis').value) || 0) + (Number(this.value) || 0) > 13) this.value = Math.abs(13 - Number(document.getElementById('biyo2-yanlis').value));"
                     class="input-field input-dogru"
                     inputmode="numeric"
                     maxlength="2"
@@ -450,7 +468,8 @@
                   <input
                     type="number"
                     id="biyo2-yanlis"
-                    oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('biyo2-dogru').value) || 0) + (Number(this.value) || 0) > 13) this.value = Math.abs(13 - Number(document.getElementById('biyo2-dogru').value));"
+                    onkeydown="if(!/[0-9]|Backspace|Tab|Delete|Arrow/.test(event.key)) event.preventDefault();"
+                    oninput="this.value = this.value.replace('.', '');if(this.value.length > 2) this.value = this.value.slice(0, 2); if ((Number(document.getElementById('biyo2-dogru').value) || 0) + (Number(this.value) || 0) > 13) this.value = Math.abs(13 - Number(document.getElementById('biyo2-dogru').value));"
                     class="input-field input-yanlis"
                     inputmode="numeric"
                     maxlength="2"
