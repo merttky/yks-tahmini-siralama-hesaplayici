@@ -1,5 +1,5 @@
 app = "yks-tahmini-siralama-hesaplayici"
-primary_region = "gru"
+primary_region = "fra"
 
 [http_service]
 auto_start_machines = true
