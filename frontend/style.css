@@ -575,6 +575,38 @@ body {
   color: var(--text-secondary);
 }
 
+.tahmin-band {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  background: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(37, 99, 235, 0.15);
+  border-radius: 999px;
+  padding: var(--space-xs) var(--space-md);
+  margin-bottom: var(--space-sm);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.tahmin-band.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tahmin-band .band-arrow {
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+.tahmin-band .band-sep {
+  opacity: 0.4;
+  font-weight: 400;
+}
+
 /* Year Cards Grid */
 .yil-grid {
   display: grid;

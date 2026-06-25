@@ -13,7 +13,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).parent))
 
 from calculator import calculate_score, ValidationError
-from rank import calculate_rank
+from rank import calculate_rank, predict_2026
 
 app = FastAPI(title="YKS SAY Hesaplayıcı API", version="2.0.0")
 
@@ -26,14 +26,6 @@ app.add_middleware(
 
 # Hesaplama yapılacak yıllar
 TARGET_YEARS = [2022, 2023, 2024, 2025]
-
-# 2026 tahmini sıralama için ağırlıklar
-TAHMIN_AGIRLIKLARI = {
-    2022: 0.3073,
-    2023: 0.1927,
-    2024: 0.1615,
-    2025: 0.3385,
-}
 
 
 class HesaplaRequest(BaseModel):
@@ -61,6 +53,8 @@ class HesaplaResponse(BaseModel):
     success: bool
     sonuclar: dict[int, YilSonucu] | None = None
     tahmin_2026: int | None = None
+    tahmin_2026_alt: int | None = None
+    tahmin_2026_ust: int | None = None
     hatalar: list[str] | None = None
 
 
@@ -100,20 +94,25 @@ def hesapla(req: HesaplaRequest):
         except Exception as e:
             hatalar.append(f"{year} yılı hesaplanamadı: {str(e)}")
 
-    # 2026 tahmini sıralama hesabı (ağırlıklı ortalama)
+    # 2026 tahmini sıralama hesabı (geometrik ortalama + band)
     tahmin_2026 = None
+    tahmin_2026_alt = None
+    tahmin_2026_ust = None
     if len(sonuclar) == len(TARGET_YEARS):
-        tahmin_2026 = round(
-            sum(
-                sonuclar[year].siralama * TAHMIN_AGIRLIKLARI[year]
-                for year in TARGET_YEARS
-            )
-        )
+        ranks = {y: sonuclar[y].siralama for y in TARGET_YEARS}
+        scores = {y: sonuclar[y].puan for y in TARGET_YEARS}
+        tahmin = predict_2026(ranks, scores)
+        if tahmin:
+            tahmin_2026 = tahmin["sira"]
+            tahmin_2026_alt = tahmin["alt"]
+            tahmin_2026_ust = tahmin["ust"]
 
     return HesaplaResponse(
         success=bool(sonuclar),
         sonuclar=sonuclar if sonuclar else None,
         tahmin_2026=tahmin_2026,
+        tahmin_2026_alt=tahmin_2026_alt,
+        tahmin_2026_ust=tahmin_2026_ust,
         hatalar=hatalar if hatalar else None,
     )
 

@@ -19,6 +19,7 @@
     btnHesapla: document.getElementById('btn-hesapla'),
     resultsSection: document.getElementById('results-section'),
     tahmin2026: document.getElementById('tahmin-2026-value'),
+    tahminBand: document.getElementById('tahmin-2026-band'),
     yilGrid: document.getElementById('yil-grid'),
     toast: document.getElementById('toast'),
     tytToplamNet: document.getElementById('tyt-toplam-net'),
@@ -232,8 +233,26 @@
     // 2026 Tahmini
     if (result.tahmin_2026 !== null && result.tahmin_2026 !== undefined) {
       animateCountUp(dom.tahmin2026, result.tahmin_2026);
+
+      // Alt-üst band
+      if (result.tahmin_2026_alt != null && result.tahmin_2026_ust != null) {
+        dom.tahminBand.innerHTML = `
+          <span class="band-arrow">▲</span>
+          <span>${formatNumber(result.tahmin_2026_alt)}</span>
+          <span class="band-sep">—</span>
+          <span>${formatNumber(result.tahmin_2026_ust)}</span>
+          <span class="band-arrow">▼</span>
+        `;
+        // Animated entrance after a small delay
+        setTimeout(() => dom.tahminBand.classList.add('visible'), 400);
+      } else {
+        dom.tahminBand.innerHTML = '';
+        dom.tahminBand.classList.remove('visible');
+      }
     } else {
       dom.tahmin2026.textContent = '—';
+      dom.tahminBand.innerHTML = '';
+      dom.tahminBand.classList.remove('visible');
     }
 
     // Yıl kartları
